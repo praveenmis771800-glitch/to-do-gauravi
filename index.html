@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ Cloud To-Do List ✨</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1563.0.min.js"></script>
+</head>
+<body>
+    <div class="background-gradient"></div>
+    <div class="floating-hearts">
+        <span class="heart">💖</span>
+        <span class="heart">💕</span>
+        <span class="heart">💗</span>
+        <span class="heart">💝</span>
+        <span class="heart">✨</span>
+        <span class="heart">🌸</span>
+    </div>
+
+    <div class="container">
+        <!-- Clock and Calendar Section -->
+        <div class="datetime-section">
+            <!-- Clock Widget -->
+            <div class="widget clock-widget">
+                <div class="widget-icon">🕐</div>
+                <div class="widget-content">
+                    <div class="time" id="currentTime">00:00:00</div>
+                    <div class="widget-label">Current Time</div>
+                </div>
+            </div>
+
+            <!-- Header Section -->
+            <header class="header">
+                <h1 class="title">
+                    <span class="icon">✨</span>
+                    My Cloud To-Do List
+                    <span class="icon">✨</span>
+                </h1>
+                <p class="subtitle">Made by Gauravi Gupta 💖</p>
+            </header>
+
+            <!-- Calendar Widget -->
+            <div class="widget calendar-widget">
+                <div class="widget-icon">📅</div>
+                <div class="widget-content">
+                    <div class="date" id="currentDate">December 5</div>
+                    <div class="widget-label" id="currentYear">2025</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AWS Configuration Panel -->
+        <div class="config-panel" id="configPanel">
+            <div class="config-header" onclick="toggleConfig()">
+                <span>⚙️ AWS Configuration</span>
+                <span class="toggle-icon" id="toggleIcon">▼</span>
+            </div>
+            <div class="config-content" id="configContent">
+                <div class="config-note">
+                    <p>💡 <strong>Note:</strong> Enter your AWS credentials to sync with DynamoDB. Your credentials are stored locally in your browser.</p>
+                </div>
+                <div class="form-group">
+                    <label for="awsRegion">AWS Region</label>
+                    <input type="text" id="awsRegion" placeholder="e.g., us-east-1" value="us-east-1">
+                </div>
+                <div class="form-group">
+                    <label for="awsAccessKey">Access Key ID</label>
+                    <input type="text" id="awsAccessKey" placeholder="Enter your AWS Access Key">
+                </div>
+                <div class="form-group">
+                    <label for="awsSecretKey">Secret Access Key</label>
+                    <input type="password" id="awsSecretKey" placeholder="Enter your AWS Secret Key">
+                </div>
+                <div class="form-group">
+                    <label for="tableName">DynamoDB Table Name</label>
+                    <input type="text" id="tableName" placeholder="e.g., TodoList" value="TodoList">
+                </div>
+                <button class="btn btn-config" onclick="saveConfig()">💾 Save Configuration</button>
+                <div class="connection-status" id="connectionStatus"></div>
+            </div>
+        </div>
+
+        <!-- Add Task Section -->
+        <div class="add-task-section">
+            <div class="input-wrapper">
+                <input 
+                    type="text" 
+                    id="taskInput" 
+                    class="task-input" 
+                    placeholder="✍️ What do you want to do today?"
+                    onkeypress="handleKeyPress(event)"
+                >
+                <button class="btn btn-add" onclick="addTask()">
+                    <span class="btn-icon">+</span>
+                    Add Task
+                </button>
+            </div>
+        </div>
+
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <button class="filter-btn active" data-filter="all" onclick="filterTasks('all')">
+                All Tasks
+            </button>
+            <button class="filter-btn" data-filter="active" onclick="filterTasks('active')">
+                Active
+            </button>
+            <button class="filter-btn" data-filter="completed" onclick="filterTasks('completed')">
+                Completed
+            </button>
+        </div>
+
+        <!-- Task List Section -->
+        <div class="task-list-container">
+            <div class="task-count" id="taskCount">
+                <span id="activeCount">0</span> tasks remaining
+            </div>
+            <ul class="task-list" id="taskList">
+                <!-- Tasks will be dynamically added here -->
+            </ul>
+            <div class="empty-state" id="emptyState">
+                <div class="empty-icon">🌸</div>
+                <p>No tasks yet! Add one to get started ✨</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Made with 💖 by Gauravi Gupta</p>
+        </footer>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

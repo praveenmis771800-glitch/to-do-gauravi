@@ -11,11 +11,11 @@ let awsConfig = {
 
 // ===== INITIALIZATION =====
 document.addEventListener("DOMContentLoaded", () => {
-    loadConfig();
-    loadTasks();
-    updateDateTime();
-    // Update clock every second
-    setInterval(updateDateTime, 1000);
+	loadConfig();
+	loadTasks();
+	updateDateTime();
+	// Update clock every second
+	setInterval(updateDateTime, 1000);
 });
 
 // ===== AWS CONFIGURATION =====
@@ -77,34 +77,34 @@ function loadConfig() {
 }
 
 function initializeAWS() {
-    try {
-        // Check if AWS SDK is loaded
-        if (typeof AWS === 'undefined') {
-            throw new Error('AWS SDK not loaded. Please refresh the page.');
-        }
+	try {
+		// Check if AWS SDK is loaded
+		if (typeof AWS === 'undefined') {
+			throw new Error('AWS SDK not loaded. Please refresh the page.');
+		}
 
-        // Check if we have valid credentials
-        if (!awsConfig.accessKeyId || !awsConfig.secretAccessKey || !awsConfig.region) {
-            console.log('AWS credentials not configured yet');
-            return;
-        }
+		// Check if we have valid credentials
+		if (!awsConfig.accessKeyId || !awsConfig.secretAccessKey || !awsConfig.region) {
+			console.log('AWS credentials not configured yet');
+			return;
+		}
 
-        AWS.config.update({
-            region: awsConfig.region,
-            credentials: new AWS.Credentials({
-                accessKeyId: awsConfig.accessKeyId,
-                secretAccessKey: awsConfig.secretAccessKey,
-            }),
-        });
+		AWS.config.update({
+			region: awsConfig.region,
+			credentials: new AWS.Credentials({
+				accessKeyId: awsConfig.accessKeyId,
+				secretAccessKey: awsConfig.secretAccessKey,
+			}),
+		});
 
-        dynamoDB = new AWS.DynamoDB.DocumentClient();
+		dynamoDB = new AWS.DynamoDB.DocumentClient();
 
-        // Test connection
-        testConnection();
-    } catch (error) {
-        console.error("AWS initialization failed:", error);
-        showConnectionStatus("Failed to initialize AWS: " + error.message, "error");
-    }
+		// Test connection
+		testConnection();
+	} catch (error) {
+		console.error("AWS initialization failed:", error);
+		showConnectionStatus("Failed to initialize AWS: " + error.message, "error");
+	}
 }
 
 function testConnection() {
@@ -160,7 +160,7 @@ function addTask() {
 
 	saveTaskToDynamoDB(task);
 	renderTasks();
-	showToast("Task added successfully! 💖", "success");
+	showToast("Task added successfully! 🐼", "success");
 }
 
 function toggleTask(id) {
@@ -243,9 +243,8 @@ function renderTasks() {
             </label>
             <span class="task-text">${escapeHtml(task.text)}</span>
             <div class="task-actions">
-                <button class="btn-delete" onclick="deleteTask('${
-									task.id
-								}')" title="Delete task">
+                <button class="btn-delete" onclick="deleteTask('${task.id
+			}')" title="Delete task">
                     🗑️
                 </button>
             </div>
@@ -399,35 +398,35 @@ function escapeHtml(text) {
 
 // ===== DATE & TIME =====
 function updateDateTime() {
-    const now = new Date();
-    
-    // Update Time
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-    const timeString = hours + ':' + minutes + ':' + seconds;
-    
-    const timeElement = document.getElementById('currentTime');
-    if (timeElement) {
-        timeElement.textContent = timeString;
-    }
-    
-    // Update Date
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 
-                    'July', 'August', 'September', 'October', 'November', 'December'];
-    const month = months[now.getMonth()];
-    const day = now.getDate();
-    const year = now.getFullYear();
-    
-    const dateString = month + ' ' + day;
-    
-    const dateElement = document.getElementById('currentDate');
-    const yearElement = document.getElementById('currentYear');
-    
-    if (dateElement) {
-        dateElement.textContent = dateString;
-    }
-    if (yearElement) {
-        yearElement.textContent = year;
-    }
+	const now = new Date();
+
+	// Update Time
+	const hours = String(now.getHours()).padStart(2, '0');
+	const minutes = String(now.getMinutes()).padStart(2, '0');
+	const seconds = String(now.getSeconds()).padStart(2, '0');
+	const timeString = hours + ':' + minutes + ':' + seconds;
+
+	const timeElement = document.getElementById('currentTime');
+	if (timeElement) {
+		timeElement.textContent = timeString;
+	}
+
+	// Update Date
+	const months = ['January', 'February', 'March', 'April', 'May', 'June',
+		'July', 'August', 'September', 'October', 'November', 'December'];
+	const month = months[now.getMonth()];
+	const day = now.getDate();
+	const year = now.getFullYear();
+
+	const dateString = month + ' ' + day;
+
+	const dateElement = document.getElementById('currentDate');
+	const yearElement = document.getElementById('currentYear');
+
+	if (dateElement) {
+		dateElement.textContent = dateString;
+	}
+	if (yearElement) {
+		yearElement.textContent = year;
+	}
 }

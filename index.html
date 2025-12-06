@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,18 +8,21 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1563.0.min.js"></script>
 </head>
+
 <body>
     <div class="background-gradient"></div>
-    <div class="floating-hearts">
-        <span class="heart">💖</span>
-        <span class="heart">💕</span>
-        <span class="heart">💗</span>
-        <span class="heart">💝</span>
-        <span class="heart">✨</span>
-        <span class="heart">🌸</span>
+    <div class="floating-pandas">
+        <span class="panda">🐼</span>
+        <span class="panda">🐼</span>
+        <span class="panda">🐼</span>
+        <span class="panda">🐼</span>
+        <span class="panda">✨</span>
+        <span class="panda">🐼</span>
     </div>
 
     <div class="container">
@@ -61,7 +65,8 @@
             </div>
             <div class="config-content" id="configContent">
                 <div class="config-note">
-                    <p>💡 <strong>Note:</strong> Enter your AWS credentials to sync with DynamoDB. Your credentials are stored locally in your browser.</p>
+                    <p>💡 <strong>Note:</strong> Enter your AWS credentials to sync with DynamoDB. Your credentials are
+                        stored locally in your browser.</p>
                 </div>
                 <div class="form-group">
                     <label for="awsRegion">AWS Region</label>
@@ -87,13 +92,8 @@
         <!-- Add Task Section -->
         <div class="add-task-section">
             <div class="input-wrapper">
-                <input 
-                    type="text" 
-                    id="taskInput" 
-                    class="task-input" 
-                    placeholder="✍️ What do you want to do today?"
-                    onkeypress="handleKeyPress(event)"
-                >
+                <input type="text" id="taskInput" class="task-input" placeholder="✍️ What do you want to do today?"
+                    onkeypress="handleKeyPress(event)">
                 <button class="btn btn-add" onclick="addTask()">
                     <span class="btn-icon">+</span>
                     Add Task
@@ -123,7 +123,7 @@
                 <!-- Tasks will be dynamically added here -->
             </ul>
             <div class="empty-state" id="emptyState">
-                <div class="empty-icon">🌸</div>
+                <div class="empty-icon">🐼</div>
                 <p>No tasks yet! Add one to get started ✨</p>
             </div>
         </div>
@@ -139,4 +139,5 @@
 
     <script src="app.js"></script>
 </body>
+
 </html>
